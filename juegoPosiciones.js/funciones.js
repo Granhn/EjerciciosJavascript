@@ -3,10 +3,10 @@ const d = document;
 const $newCard = d.createElement("figure"),
 $img = d.createElement("img"),
 $figcaption = d.createElement("figcaption"),
-$figtext = d.createTextNode("Any");
+$figtext = d.createTextNode("Any"),
+cardsArray = [];
 
-function createTarjeta(){
-
+function createCard(){
     //Setting clases and attributes
     $img.setAttribute("src","https://placeimg.com/200/200/any");
     $img.setAttribute("alt","Any");
@@ -17,25 +17,69 @@ function createTarjeta(){
     $newCard.appendChild($figcaption);
     $newCard.classList.add("card");
 
+    cardsArray.push($newCard);
+    console.log(cardsArray);
 }
 
-function insertFirstChiled(){
-    d.prepend($newCard);
+
+function insertFirst(btnBefore, parent){
+
+    const parentNode = d.querySelector(parent);
+    d.addEventListener("click", e => {
+        
+        if( e.target.matches(btnBefore) ){
+            createCard();
+            parentNode.prepend(cardsArray[cardsArray.length - 1]);
+        }
+    })
+
 }
 
-function insertLastChild(){
-    d.append($card);
+function insertLast(btnLast, parent){
+
+    const parentNode = d.querySelector(parent);
+    d.addEventListener("click", e => {
+        
+        if( e.target.matches(btnLast) ){
+            createCard();
+            parentNode.append($newCard);
+        }
+    });
+
 }
 
-function insertBeforeElement(){
-    d.insertBefore($card);
+function insertAfter(btnAfter, parent){
+
+    const parentNode = d.querySelector(parent);
+    d.addEventListener("click", e => {
+        
+        if( e.target.matches(btnAfter) ){
+            createCard();
+            parentNode.after($newCard);
+        }
+    })
+
 }
 
-export const functions= {
-    createTarjeta,
-    insertFirstChiled,
-    insertLastChild,
-    insertBeforeElement
+function insertBefore(btnBefore, parent){
+
+    const parentNode = d.querySelector(parent);
+    d.addEventListener("click", e => {
+        if( e.target.matches(btnBefore) ){
+            createCard();
+            parentNode.before($newCard);
+        }
+    })
+
+}
+
+const functions= {
+    createCard,
+    insertAfter,
+    insertFirst,
+    insertLast,
+    insertBefore
 };
 
 
+export default functions;

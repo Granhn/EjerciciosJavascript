@@ -3,14 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.functions = void 0;
+exports["default"] = void 0;
 var d = document;
 var $newCard = d.createElement("figure"),
     $img = d.createElement("img"),
     $figcaption = d.createElement("figcaption"),
-    $figtext = d.createTextNode("Any");
+    $figtext = d.createTextNode("Any"),
+    cardsArray = [];
 
-function createTarjeta() {
+function createCard() {
   //Setting clases and attributes
   $img.setAttribute("src", "https://placeimg.com/200/200/any");
   $img.setAttribute("alt", "Any");
@@ -19,24 +20,56 @@ function createTarjeta() {
   $newCard.appendChild($img);
   $newCard.appendChild($figcaption);
   $newCard.classList.add("card");
+  cardsArray.push($newCard);
+  console.log(cardsArray);
 }
 
-function insertFirstChiled() {
-  d.prepend($newCard);
+function insertFirst(btnBefore, parent) {
+  var parentNode = d.querySelector(parent);
+  d.addEventListener("click", function (e) {
+    if (e.target.matches(btnBefore)) {
+      createCard();
+      parentNode.prepend(cardsArray[cardsArray.length - 1]);
+    }
+  });
 }
 
-function insertLastChild() {
-  d.append($card);
+function insertLast(btnLast, parent) {
+  var parentNode = d.querySelector(parent);
+  d.addEventListener("click", function (e) {
+    if (e.target.matches(btnLast)) {
+      createCard();
+      parentNode.append($newCard);
+    }
+  });
 }
 
-function insertBeforeElement() {
-  d.insertBefore($card);
+function insertAfter(btnAfter, parent) {
+  var parentNode = d.querySelector(parent);
+  d.addEventListener("click", function (e) {
+    if (e.target.matches(btnAfter)) {
+      createCard();
+      parentNode.after($newCard);
+    }
+  });
+}
+
+function insertBefore(btnBefore, parent) {
+  var parentNode = d.querySelector(parent);
+  d.addEventListener("click", function (e) {
+    if (e.target.matches(btnBefore)) {
+      createCard();
+      parentNode.before($newCard);
+    }
+  });
 }
 
 var functions = {
-  createTarjeta: createTarjeta,
-  insertFirstChiled: insertFirstChiled,
-  insertLastChild: insertLastChild,
-  insertBeforeElement: insertBeforeElement
+  createCard: createCard,
+  insertAfter: insertAfter,
+  insertFirst: insertFirst,
+  insertLast: insertLast,
+  insertBefore: insertBefore
 };
-exports.functions = functions;
+var _default = functions;
+exports["default"] = _default;
