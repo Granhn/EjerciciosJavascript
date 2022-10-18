@@ -10,4 +10,5 @@ var d = document;
 d.addEventListener("DOMContentLoaded", function (e) {
   (0, _menu_hambuguesa["default"])(".panel-btn", ".panel", ".menu a");
   (0, _reloj.digitalClock)("#reloj", "#activar-reloj", "#desactivar-reloj");
+  (0, _reloj.alarm)("assests/alarma.mp3", "#activar-alarma", "#desactivar-alarma");
 });
